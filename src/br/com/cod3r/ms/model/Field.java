@@ -74,4 +74,8 @@ public class Field {
 	public boolean isMarked() {
 		return marked;
 	}
+	
+	public void undermine() {
+		this.undermined = true;
+	}
 }
