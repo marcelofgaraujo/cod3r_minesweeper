@@ -90,4 +90,11 @@ public class Field {
 	public int getColumn() {
 		return column;
 	}
+	
+	boolean goalAchieved() {
+		boolean revealed = !undermined && marked;
+		boolean protectedField = undermined && marked;
+		
+		return revealed || protectedField;
+	}
 }
