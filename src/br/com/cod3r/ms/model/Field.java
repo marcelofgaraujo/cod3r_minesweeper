@@ -3,6 +3,8 @@ package br.com.cod3r.ms.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.cod3r.ms.exception.Explosion;
+
 public class Field {
 	
 	private final int row;
@@ -45,5 +47,15 @@ public class Field {
 		}
 	}
 	
-	
+	boolean toOpen() {
+		if(!open && !marked) {
+			open = true;
+			
+			if(undermined) {
+				throw new Explosion();
+			}
+		}
+		
+		return false;
+	}
 }
