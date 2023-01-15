@@ -101,4 +101,10 @@ public class Field {
 	long neighbourhoodMines() {
 		return neighbourhood.stream().filter(n -> n.undermined).count();
 	}
+	
+	void resetGame() {
+		this.open = false;
+		this.undermined = false;
+		this.marked = false;
+	}
 }
