@@ -70,4 +70,8 @@ public class Field {
 	boolean safeNeighbourhood() {
 		return neighbourhood.stream().noneMatch(n -> n.undermined);
 	}
+	
+	public boolean isMarked() {
+		return marked;
+	}
 }
