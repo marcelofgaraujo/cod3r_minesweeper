@@ -54,8 +54,20 @@ public class Field {
 			if(undermined) {
 				throw new Explosion();
 			}
+			
+			if(safeNeighbourhood()) {
+				neighbourhood.forEach(n -> n.toOpen());
+			}
+			
+			return true;
+			
+		} else {
+			return false;			
 		}
 		
-		return false;
+	}
+	
+	boolean safeNeighbourhood() {
+		return neighbourhood.stream().noneMatch(n -> n.undermined);
 	}
 }
