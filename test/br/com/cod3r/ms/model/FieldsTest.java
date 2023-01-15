@@ -31,5 +31,17 @@ class FieldsTest {
 		
 		assertFalse(result);
 	}
+	
+	@Test
+	void defaultMarkedValue() {
+		assertFalse(field.isMarked());
+	}
+	
+	@Test
+	void testToggleMarking() {
+		field.toggleMark();
+		assertTrue(field.isMarked());
+	}
+	
 
 }
