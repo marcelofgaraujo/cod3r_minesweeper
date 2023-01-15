@@ -97,4 +97,8 @@ public class Field {
 		
 		return revealed || protectedField;
 	}
+	
+	long neighbourhoodMines() {
+		return neighbourhood.stream().filter(n -> n.undermined).count();
+	}
 }
