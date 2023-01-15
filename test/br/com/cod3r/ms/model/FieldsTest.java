@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import br.com.cod3r.ms.exception.Explosion;
+
 class FieldsTest {
 	
 	private Field field = new Field(3, 3);
@@ -50,5 +52,61 @@ class FieldsTest {
 		assertFalse(field.isMarked());
 	}
 	
+	@Test
+	void testNonUnderminedNonMarkedField() {
+		assertTrue(field.toOpen());
+	}
+	
+	@Test
+	void testMarkedNonUndermined() {
+		field.toggleMark();
+		assertFalse(field.toOpen());
+	}
+	
+	@Test
+	void testOpenUnderminedMarked() {
+		field.toggleMark();
+		field.undermine();
+		assertFalse(field.toOpen());
+	}
+	
+	@Test
+	void testOpenUnderminedNonMarked() {
+		field.undermine();
+		
+		assertThrows(Explosion.class, () -> {
+			field.toOpen();
+		});
+	}
+	
+	@Test
+	void testOpenWithNeighbours() {
+		
+		Field field11 = new Field(1, 1);
+		Field field22 = new Field(2, 2);
+		
+		field22.addNeighbour(field11);
+		field.addNeighbour(field22);
+		field.toOpen();
+		
+		assertTrue(field22.isOpen() && field11.isOpen());
+	}
+	
+	@Test
+	void testOpenWithNeighboursUndermined() {
+		
+		Field field11 = new Field(1, 1);
+		Field field12 = new Field(1, 2);
+		field12.undermine();
+		
+		Field field22 = new Field(2, 2);
+		field22.addNeighbour(field11);
+		field22.addNeighbour(field12);
+		
+		field.addNeighbour(field22);
+		field.toOpen();
+		
+		assertTrue(field22.isOpen() && !field11.isOpen());
+	}
 
 }
