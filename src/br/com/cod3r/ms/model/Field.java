@@ -107,4 +107,19 @@ public class Field {
 		this.undermined = false;
 		this.marked = false;
 	}
+	
+	@Override
+	public String toString() {
+		if(marked) {
+			return "x";
+		} else if(open && undermined) {
+			return "*";
+		} else if(open && neighbourhoodMines() > 0) {
+			return Long.toString(neighbourhoodMines());
+		} else if(open) {
+			return " ";
+		} else {
+			return "?";
+		}
+	}
 }
