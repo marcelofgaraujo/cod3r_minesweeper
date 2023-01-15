@@ -15,5 +15,21 @@ class FieldsTest {
 		
 		assertTrue(result);
 	}
+	
+	@Test
+	void testRealNeighbourRange2() {
+		Field neighbour = new Field(2, 2);
+		boolean result = field.addNeighbour(neighbour);
+		
+		assertTrue(result);
+	}
+	
+	@Test
+	void testNonNeighbour() {
+		Field neighbour = new Field(1, 1);
+		boolean result = field.addNeighbour(neighbour);
+		
+		assertFalse(result);
+	}
 
 }
