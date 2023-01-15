@@ -38,4 +38,12 @@ public class Field {
 			return false;
 		}
 	}
+	
+	void toggleMark() {
+		if(!this.open) {
+			this.marked = !marked;
+		}
+	}
+	
+	
 }
