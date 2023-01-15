@@ -82,4 +82,12 @@ public class Field {
 	public boolean isOpen() {
 		return this.open;
 	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public int getColumn() {
+		return column;
+	}
 }
