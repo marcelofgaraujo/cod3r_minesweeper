@@ -43,5 +43,12 @@ class FieldsTest {
 		assertTrue(field.isMarked());
 	}
 	
+	@Test
+	void testTwiceToggleMarking() {
+		field.toggleMark();
+		field.toggleMark();
+		assertFalse(field.isMarked());
+	}
+	
 
 }
