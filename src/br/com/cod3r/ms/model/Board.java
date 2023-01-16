@@ -49,6 +49,16 @@ public class Board {
 		} while(armedMines < mines);
 	}
 	
+	public void openField(int row, int column) {
+		Predicate<Field> position = f -> f.getRow() == row && f.getColumn() == column;
+		
+		fields.parallelStream()
+			.filter(position)
+			.findFirst()
+			.ifPresent(f -> f.toOpen());
+	
+	}
+	
 	public boolean goalReached() {
 		return fields.stream().allMatch(f -> f.goalAchieved());
 	}
