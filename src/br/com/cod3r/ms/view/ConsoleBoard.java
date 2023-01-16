@@ -1,5 +1,7 @@
 package br.com.cod3r.ms.view;
 
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import br.com.cod3r.ms.exception.ExitGame;
@@ -48,6 +50,19 @@ public class ConsoleBoard {
 			
 			while(!board.goalReached()) {
 				System.out.println(board);
+				
+				String typed = getTypedValue("Type (x, y): ");
+				
+				Iterator<Integer> xy = Arrays.stream(typed.split(","))
+						.map(e -> Integer.parseInt(e.trim())).iterator();
+				
+				typed = getTypedValue("1 - open / 2 - mark: ");
+				
+				if("1".equals(typed)) {
+					board.openField(xy.next(), xy.next());
+				} else if ("2".equals(typed)) {
+					board.changeMark(xy.next(), xy.next());
+				}
 			}
 			
 			System.out.println("You win!!");
@@ -55,6 +70,17 @@ public class ConsoleBoard {
 			System.out.println("You lose...");
 		}
 		
+	}
+	
+	private String getTypedValue(String text) {
+		System.out.print(text);
+		String typed = enter.nextLine();
+		
+		if("exit".equalsIgnoreCase(typed)) {
+			throw new ExitGame();
+		}
+		
+		return typed;
 	}
 	
 }
