@@ -30,8 +30,11 @@ public class Board {
 	}
 	
 	private void hitchNeighbours() {
-		
-		
+		for(Field f1: fields) {
+			for(Field f2: fields) {
+				f1.addNeighbour(f2);
+			}
+		}
 	}
 	
 	private void sortMines() {
