@@ -17,10 +17,25 @@ public class Board {
 		this.mines = mines;
 		
 		generateFields();
+		hitchNeighbours();
+		sortMines();
 	}
 
 	private void generateFields() {
-		// TODO Auto-generated method stub
+		for(int row = 0; row < rows; row++) {
+			for(int column = 0; column < columns; column++) {
+				fields.add(new Field(row, column));
+			}
+		}
+	}
+	
+	private void hitchNeighbours() {
+		
+		
+	}
+	
+	private void sortMines() {
+		
 		
 	}
 	
