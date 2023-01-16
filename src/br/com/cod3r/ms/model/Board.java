@@ -53,4 +53,9 @@ public class Board {
 		return fields.stream().allMatch(f -> f.goalAchieved());
 	}
 	
+	public void resetGame() {
+		fields.stream().forEach(f -> f.reset());
+		sortMines();
+	}
+	
 }
