@@ -2,6 +2,7 @@ package br.com.cod3r.ms.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Board {
 	
@@ -38,8 +39,14 @@ public class Board {
 	}
 	
 	private void sortMines() {
+		long armedMines = 0;
+		Predicate<Field> undermined = f -> f.isUndermined();
 		
-		
+		do {
+			armedMines = fields.stream().filter(undermined).count();
+			int random = (int) (Math.random() * fields.size());
+		} while(armedMines < mines);
 	}
+	
 	
 }
