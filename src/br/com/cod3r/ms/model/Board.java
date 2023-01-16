@@ -58,4 +58,22 @@ public class Board {
 		sortMines();
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		
+		int i = 0;
+		for(int r = 0; r < rows; r++) {
+			for(int c = 0; c < columns; c++) {
+				sb.append(" ");
+				sb.append(fields.get(i));
+				sb.append(" ");
+				i++;
+			}
+			sb.append("\n");
+		}
+		
+		return sb.toString();
+	}
+	
 }
