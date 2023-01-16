@@ -106,7 +106,7 @@ public class Field {
 		return neighbourhood.stream().filter(n -> n.undermined).count();
 	}
 	
-	void resetGame() {
+	void reset() {
 		this.open = false;
 		this.undermined = false;
 		this.marked = false;
