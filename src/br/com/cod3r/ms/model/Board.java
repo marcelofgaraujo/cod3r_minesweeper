@@ -48,5 +48,8 @@ public class Board {
 		} while(armedMines < mines);
 	}
 	
+	public boolean goalReached() {
+		return fields.stream().allMatch(f -> f.goalAchieved());
+	}
 	
 }
