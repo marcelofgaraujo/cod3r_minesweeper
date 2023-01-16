@@ -45,6 +45,7 @@ public class Board {
 		do {
 			armedMines = fields.stream().filter(undermined).count();
 			int random = (int) (Math.random() * fields.size());
+			fields.get(random).undermine();
 		} while(armedMines < mines);
 	}
 	
