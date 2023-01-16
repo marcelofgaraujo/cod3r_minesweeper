@@ -56,7 +56,15 @@ public class Board {
 			.filter(position)
 			.findFirst()
 			.ifPresent(f -> f.toOpen());
+	}
 	
+	public void changeMark(int row, int column) {
+		Predicate<Field> position = f -> f.getRow() == row && f.getColumn() == column;
+		
+		fields.parallelStream()
+			.filter(position)
+			.findFirst()
+			.ifPresent(f -> f.toggleMark());
 	}
 	
 	public boolean goalReached() {
