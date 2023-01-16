@@ -79,6 +79,10 @@ public class Field {
 		this.undermined = true;
 	}
 	
+	public boolean isUndermined() {
+		return this.undermined;
+	}
+	
 	public boolean isOpen() {
 		return this.open;
 	}
