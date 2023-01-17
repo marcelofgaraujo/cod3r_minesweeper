@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+import br.com.cod3r.ms.exception.Explosion;
+
 public class Board {
 	
 	private int rows;
@@ -52,10 +54,15 @@ public class Board {
 	public void openField(int row, int column) {
 		Predicate<Field> position = f -> f.getRow() == row && f.getColumn() == column;
 		
-		fields.parallelStream()
-			.filter(position)
-			.findFirst()
-			.ifPresent(f -> f.toOpen());
+		try {
+			fields.parallelStream()
+				.filter(position)
+				.findFirst()
+				.ifPresent(f -> f.toOpen());
+		} catch (Explosion e) {
+			fields.forEach(f -> f.setOpen(true));
+			throw e;
+		}
 	}
 	
 	public void changeMark(int row, int column) {
