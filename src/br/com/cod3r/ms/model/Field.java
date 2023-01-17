@@ -83,6 +83,10 @@ public class Field {
 		return this.undermined;
 	}
 	
+	void setOpen(boolean open) {
+		this.open = open;
+	}
+
 	public boolean isOpen() {
 		return this.open;
 	}
