@@ -85,7 +85,7 @@ public class Board implements ObserverField {
 	@Override
 	public void eventOcurred(Field f, FieldEvents e) {
 		if (e == FieldEvents.EXPLODE) {
-			System.out.println("you lose.."); // FIXME update implementation
+			showMines();
 			notifyObservers(false);
 		} else if (this.goalReached()) {
 			notifyObservers(true);
