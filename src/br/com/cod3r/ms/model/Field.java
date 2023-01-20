@@ -83,7 +83,7 @@ public class Field {
 		
 	}
 	
-	boolean safeNeighbourhood() {
+	public boolean safeNeighbourhood() {
 		return neighbourhood.stream().noneMatch(n -> n.undermined);
 	}
 	
@@ -126,8 +126,8 @@ public class Field {
 		return revealed || protectedField;
 	}
 	
-	long neighbourhoodMines() {
-		return neighbourhood.stream().filter(n -> n.undermined).count();
+	public int neighbourhoodMines() {
+		return (int) neighbourhood.stream().filter(n -> n.undermined).count();
 	}
 	
 	void reset() {
