@@ -134,6 +134,8 @@ public class Field {
 		this.open = false;
 		this.undermined = false;
 		this.marked = false;
+		
+		notifyObservers(FieldEvents.RESET);
 	}
 	
 }
