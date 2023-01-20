@@ -52,6 +52,7 @@ public class FieldButton extends JButton implements ObserverField, MouseListener
 
 	private void applyDefaultStyle() {
 		setBackground(DEFAULT_BG);
+		setBorder(BorderFactory.createBevelBorder(0));
 		setText("");
 		
 	}
