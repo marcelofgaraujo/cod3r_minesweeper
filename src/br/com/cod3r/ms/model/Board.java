@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class Board {
+public class Board implements ObserverField {
 	
 	private int rows;
 	private int columns;
@@ -25,7 +25,9 @@ public class Board {
 	private void generateFields() {
 		for(int row = 0; row < rows; row++) {
 			for(int column = 0; column < columns; column++) {
-				fields.add(new Field(row, column));
+				Field field = new Field(row, column);
+				field.registerObserver(this);
+				fields.add(field);
 			}
 		}
 	}
@@ -80,6 +82,16 @@ public class Board {
 	public void resetGame() {
 		fields.stream().forEach(f -> f.reset());
 		sortMines();
+	}
+
+	@Override
+	public void eventOcurred(Field f, FieldEvents e) {
+		if(e == FieldEvents.EXPLODE) {
+			System.out.println("you lose.."); // FIXME update implementation
+		} else if(this.goalReached()) {
+			System.out.println("you win!");
+		}
+		
 	}
 	
 }

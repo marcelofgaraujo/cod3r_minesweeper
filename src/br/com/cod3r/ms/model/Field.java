@@ -20,6 +20,10 @@ public class Field {
 		this.column = column;
 	}
 	
+	public void registerObserver(ObserverField observer) {
+		observers.add(observer);
+	}
+	
 	private void notifyObservers(FieldEvents event) {
 		observers.stream()
 			.forEach(obs -> obs.eventOcurred(this, event));
