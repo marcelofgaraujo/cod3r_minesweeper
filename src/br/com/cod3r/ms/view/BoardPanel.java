@@ -20,11 +20,13 @@ public class BoardPanel extends JPanel {
 
 		SwingUtilities.invokeLater(() -> {
 			board.registerObserver(e -> {
-				if (Boolean.FALSE) {
+				if (e.isWin()) {
 					JOptionPane.showMessageDialog(this, "You win!! :D");
 				} else {
 					JOptionPane.showMessageDialog(this, "You lose!! :(");
 				}
+				
+				board.resetGame();
 			});
 		});
 	}
