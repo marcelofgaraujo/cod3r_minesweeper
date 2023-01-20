@@ -49,7 +49,7 @@ public class Field {
 		}
 	}
 	
-	void toggleMark() {
+	public void toggleMark() {
 		if(!this.open) {
 			this.marked = !marked;
 			
@@ -61,7 +61,7 @@ public class Field {
 		}
 	}
 	
-	boolean toOpen() {
+	public boolean toOpen() {
 		if(!open && !marked) {
 			open = true;
 			
