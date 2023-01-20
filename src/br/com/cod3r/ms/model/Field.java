@@ -13,10 +13,16 @@ public class Field {
 	private boolean marked;
 	
 	private List<Field> neighbourhood = new ArrayList<>();
+	private List<ObserverField> observers = new ArrayList<>();
 	
 	Field(int row, int column) {
 		this.row = row;
 		this.column = column;
+	}
+	
+	private void notifyObservers(FieldEvents event) {
+		observers.stream()
+			.forEach(obs -> obs.eventOcurred(this, event));
 	}
 	
 	boolean addNeighbour(Field neighbour) {
@@ -42,6 +48,12 @@ public class Field {
 	void toggleMark() {
 		if(!this.open) {
 			this.marked = !marked;
+			
+			if(this.marked) {
+				notifyObservers(FieldEvents.MARK);
+			} else {
+				notifyObservers(FieldEvents.MARKOFF);
+			}
 		}
 	}
 	
