@@ -62,8 +62,10 @@ public class Field {
 			open = true;
 			
 			if(undermined) {
-				// TODO implement new version
+				notifyObservers(FieldEvents.EXPLODE);
 			}
+			
+			setOpen(open);
 			
 			if(safeNeighbourhood()) {
 				neighbourhood.forEach(n -> n.toOpen());
@@ -95,6 +97,10 @@ public class Field {
 	
 	void setOpen(boolean open) {
 		this.open = open;
+		
+		if(this.open) {
+			notifyObservers(FieldEvents.OPEN);
+		}
 	}
 
 	public boolean isOpen() {
