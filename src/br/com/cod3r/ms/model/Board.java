@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-import br.com.cod3r.ms.exception.Explosion;
-
 public class Board {
 	
 	private int rows;
@@ -59,7 +57,8 @@ public class Board {
 				.filter(position)
 				.findFirst()
 				.ifPresent(f -> f.toOpen());
-		} catch (Explosion e) {
+		} catch (Exception e) {
+			// FIXME tweak method implementation
 			fields.forEach(f -> f.setOpen(true));
 			throw e;
 		}
@@ -81,35 +80,6 @@ public class Board {
 	public void resetGame() {
 		fields.stream().forEach(f -> f.reset());
 		sortMines();
-	}
-	
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		
-		sb.append("  ");
-		for(int c = 0; c < columns; c++) {
-			sb.append(" ");
-			sb.append(c);
-			sb.append(" ");
-		}
-		
-		sb.append("\n");
-		
-		int i = 0;
-		for(int r = 0; r < rows; r++) {
-			sb.append(r);
-			sb.append(" ");
-			for(int c = 0; c < columns; c++) {
-				sb.append(" ");
-				sb.append(fields.get(i));
-				sb.append(" ");
-				i++;
-			}
-			sb.append("\n");
-		}
-		
-		return sb.toString();
 	}
 	
 }

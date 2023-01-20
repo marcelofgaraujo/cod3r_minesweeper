@@ -3,8 +3,6 @@ package br.com.cod3r.ms.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.cod3r.ms.exception.Explosion;
-
 public class Field {
 	
 	private final int row;
@@ -52,7 +50,7 @@ public class Field {
 			open = true;
 			
 			if(undermined) {
-				throw new Explosion();
+				// TODO implement new version
 			}
 			
 			if(safeNeighbourhood()) {
@@ -116,18 +114,4 @@ public class Field {
 		this.marked = false;
 	}
 	
-	@Override
-	public String toString() {
-		if(marked) {
-			return "x";
-		} else if(open && undermined) {
-			return "*";
-		} else if(open && neighbourhoodMines() > 0) {
-			return Long.toString(neighbourhoodMines());
-		} else if(open) {
-			return " ";
-		} else {
-			return "?";
-		}
-	}
 }
