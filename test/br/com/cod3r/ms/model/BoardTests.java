@@ -15,7 +15,7 @@ public class BoardTests {
 	@Test
 	void testGenerateFields() {
 		board.generateFields();
-		boolean result = board.getFieldsNumber() == rows * columns;
+		boolean result = board.getFieldsNumber() == rows * columns; // FIXME fields number getting duplicated
 		assertTrue(result);
 	}
 	
