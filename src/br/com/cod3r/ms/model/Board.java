@@ -31,6 +31,14 @@ public class Board implements ObserverField {
 	public int getColumns() {
 		return columns;
 	}
+	
+	public int getFieldsNumber() {
+		return fields.size();
+	}
+	
+	public int getMines() {
+		return this.mines;
+	}
 
 	public void forEachField(Consumer<Field> function) {
 		fields.forEach(function);
@@ -44,7 +52,7 @@ public class Board implements ObserverField {
 		observers.stream().forEach(obs -> obs.accept(new ResultEvent(result)));
 	}
 
-	private void generateFields() {
+	void generateFields() {
 		for (int row = 0; row < rows; row++) {
 			for (int column = 0; column < columns; column++) {
 				Field field = new Field(row, column);
@@ -62,7 +70,7 @@ public class Board implements ObserverField {
 		}
 	}
 
-	private void sortMines() {
+	void sortMines() {
 		long armedMines = 0;
 		Predicate<Field> undermined = f -> f.isUndermined();
 
