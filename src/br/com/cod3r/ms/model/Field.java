@@ -120,7 +120,7 @@ public class Field {
 	}
 	
 	boolean goalAchieved() {
-		boolean revealed = !undermined && marked;
+		boolean revealed = !undermined && open;
 		boolean protectedField = undermined && marked;
 		
 		return revealed || protectedField;
