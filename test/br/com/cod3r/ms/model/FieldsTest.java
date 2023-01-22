@@ -1,12 +1,11 @@
 package br.com.cod3r.ms.model;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import br.com.cod3r.ms.exception.Explosion;
-
-class FieldsTest {
+class FieldsTest { // TODO update uniter tests to new version of functions
 	
 	private Field field = new Field(3, 3);
 	
@@ -73,10 +72,10 @@ class FieldsTest {
 	@Test
 	void testOpenUnderminedNonMarked() {
 		field.undermine();
+		field.toOpen();
 		
-		assertThrows(Explosion.class, () -> {
-			field.toOpen();
-		});
+		boolean result = field.isUndermined() && field.isOpen();
+		assertTrue(result);
 	}
 	
 	@Test

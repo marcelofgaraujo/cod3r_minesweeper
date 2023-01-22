@@ -3,8 +3,6 @@ package br.com.cod3r.ms.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.cod3r.ms.exception.Explosion;
-
 public class Field {
 	
 	private final int row;
@@ -15,10 +13,20 @@ public class Field {
 	private boolean marked;
 	
 	private List<Field> neighbourhood = new ArrayList<>();
+	private List<ObserverField> observers = new ArrayList<>();
 	
 	Field(int row, int column) {
 		this.row = row;
 		this.column = column;
+	}
+	
+	public void registerObserver(ObserverField observer) {
+		observers.add(observer);
+	}
+	
+	private void notifyObservers(FieldEvents event) {
+		observers.stream()
+			.forEach(obs -> obs.eventOcurred(this, event));
 	}
 	
 	boolean addNeighbour(Field neighbour) {
@@ -41,19 +49,27 @@ public class Field {
 		}
 	}
 	
-	void toggleMark() {
+	public void toggleMark() {
 		if(!this.open) {
 			this.marked = !marked;
+			
+			if(this.marked) {
+				notifyObservers(FieldEvents.MARK);
+			} else {
+				notifyObservers(FieldEvents.MARKOFF);
+			}
 		}
 	}
 	
-	boolean toOpen() {
+	public boolean toOpen() {
 		if(!open && !marked) {
 			open = true;
 			
 			if(undermined) {
-				throw new Explosion();
+				notifyObservers(FieldEvents.EXPLODE);
 			}
+			
+			setOpen(open);
 			
 			if(safeNeighbourhood()) {
 				neighbourhood.forEach(n -> n.toOpen());
@@ -67,7 +83,7 @@ public class Field {
 		
 	}
 	
-	boolean safeNeighbourhood() {
+	public boolean safeNeighbourhood() {
 		return neighbourhood.stream().noneMatch(n -> n.undermined);
 	}
 	
@@ -85,6 +101,10 @@ public class Field {
 	
 	void setOpen(boolean open) {
 		this.open = open;
+		
+		if(this.open) {
+			notifyObservers(FieldEvents.OPEN);
+		}
 	}
 
 	public boolean isOpen() {
@@ -100,34 +120,22 @@ public class Field {
 	}
 	
 	boolean goalAchieved() {
-		boolean revealed = !undermined && marked;
+		boolean revealed = !undermined && open;
 		boolean protectedField = undermined && marked;
 		
 		return revealed || protectedField;
 	}
 	
-	long neighbourhoodMines() {
-		return neighbourhood.stream().filter(n -> n.undermined).count();
+	public int neighbourhoodMines() {
+		return (int) neighbourhood.stream().filter(n -> n.undermined).count();
 	}
 	
 	void reset() {
 		this.open = false;
 		this.undermined = false;
 		this.marked = false;
+		
+		notifyObservers(FieldEvents.RESET);
 	}
 	
-	@Override
-	public String toString() {
-		if(marked) {
-			return "x";
-		} else if(open && undermined) {
-			return "*";
-		} else if(open && neighbourhoodMines() > 0) {
-			return Long.toString(neighbourhoodMines());
-		} else if(open) {
-			return " ";
-		} else {
-			return "?";
-		}
-	}
 }
