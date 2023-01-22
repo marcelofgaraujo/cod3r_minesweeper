@@ -113,7 +113,7 @@ public class Board implements ObserverField {
 
 	}
 	
-	private void showMines() {
+	void showMines() {
 		fields.stream()
 			.filter(f -> f.isUndermined())
 			.filter(f -> !f.isMarked())
