@@ -1,9 +1,9 @@
 package br.com.cod3r.ms.model;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -106,5 +106,15 @@ public class BoardTests {
 		});
 		
 		assertTrue(board.goalReached());
+	}
+	
+	@Test
+	void testShowMines() {
+		board.resetGame();
+		board.showMines();
+		
+		int result = (int) fields.parallelStream().filter(f -> f.isUndermined() && f.isOpen()).count();
+		
+		assertEquals(result, mines);
 	}
 }
