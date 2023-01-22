@@ -87,6 +87,14 @@ public class BoardTests {
 	}
 	
 	@Test
+	void testResetGame() {
+		board.resetGame();
+		boolean result = fields.parallelStream().allMatch(f -> !f.isOpen());
+		
+		assertTrue(result);
+	}
+	
+	@Test
 	void testGoalReached() {
 		board.resetGame();
 		fields.parallelStream().forEach(f -> {
