@@ -85,4 +85,18 @@ public class BoardTests {
 		assertTrue(result2);
 		assertTrue(result3);
 	}
+	
+	@Test
+	void testGoalReached() {
+		board.resetGame();
+		fields.parallelStream().forEach(f -> {
+			if (f.isUndermined()) {
+				f.toggleMark();
+			} else {
+				f.toOpen();
+			}
+		});
+		
+		assertTrue(board.goalReached());
+	}
 }
