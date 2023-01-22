@@ -30,12 +30,29 @@ public class BoardTests {
 	@Test
 	void testOpenField() {
 		board.openField(4, 3);
-		boolean result = fields
+		board.openField(1, 2);
+		board.openField(0, 0);
+		
+		boolean result1 = fields
 			  .parallelStream()
 			  .filter(f -> f.isOpen() && (f.getRow() == 4 && f.getColumn() == 3))
 			  .findFirst()
 			  .isPresent();
 		
-		assertTrue(result);
+		boolean result2 = fields
+				.parallelStream()
+				.filter(f -> f.isOpen() && (f.getRow() == 1 && f.getColumn() == 2))
+				.findFirst()
+				.isPresent();
+		
+		boolean result3 = fields
+				.parallelStream()
+				.filter(f -> f.isOpen() && (f.getRow() == 0 && f.getColumn() == 0))
+				.findFirst()
+				.isPresent();
+		
+		assertTrue(result1);
+		assertTrue(result2);
+		assertTrue(result3);
 	}
 }
