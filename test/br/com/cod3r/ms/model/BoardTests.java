@@ -55,4 +55,34 @@ public class BoardTests {
 		assertTrue(result2);
 		assertTrue(result3);
 	}
+	
+	@Test
+	void testChangeMark() {
+		board.changeMark(2, 2);
+		board.changeMark(4, 3);
+		board.changeMark(0, 2);
+		board.changeMark(0, 2);
+		
+		boolean result1 = fields
+				  .parallelStream()
+				  .filter(f -> f.isMarked() && (f.getRow() == 2 && f.getColumn() == 2))
+				  .findFirst()
+				  .isPresent();
+			
+			boolean result2 = fields
+					.parallelStream()
+					.filter(f -> f.isMarked() && (f.getRow() == 4 && f.getColumn() == 3))
+					.findFirst()
+					.isPresent();
+			
+			boolean result3 = fields
+					.parallelStream()
+					.filter(f -> !f.isMarked() && (f.getRow() == 0 && f.getColumn() == 2))
+					.findFirst()
+					.isPresent();
+			
+		assertTrue(result1);
+		assertTrue(result2);
+		assertTrue(result3);
+	}
 }
