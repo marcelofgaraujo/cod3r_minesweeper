@@ -69,14 +69,14 @@ class FieldsTest { // TODO update uniter tests to new version of functions
 		assertFalse(field.toOpen());
 	}
 	
-//	@Test
-//	void testOpenUnderminedNonMarked() {
-//		field.undermine();
-//		
-//		assertThrows(Explosion.class, () -> {
-//			field.toOpen();
-//		});
-//	}
+	@Test
+	void testOpenUnderminedNonMarked() {
+		field.undermine();
+		field.toOpen();
+		
+		boolean result = field.isUndermined() && field.isOpen();
+		assertTrue(result);
+	}
 	
 	@Test
 	void testOpenWithNeighbours() {
