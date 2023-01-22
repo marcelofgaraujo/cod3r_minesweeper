@@ -32,12 +32,12 @@ public class Board implements ObserverField {
 		return columns;
 	}
 	
-	public int getFieldsNumber() {
-		return fields.size();
-	}
-	
 	public int getMines() {
 		return this.mines;
+	}
+
+	public List<Field> getFields() {
+		return fields;
 	}
 
 	public void forEachField(Consumer<Field> function) {
