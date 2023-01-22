@@ -113,8 +113,10 @@ public class BoardTests {
 		board.resetGame();
 		board.showMines();
 		
-		int result = (int) fields.parallelStream().filter(f -> f.isUndermined() && f.isOpen()).count();
+		int openFields = (int) fields.parallelStream().filter(f -> f.isUndermined() && f.isOpen()).count();
+		int closedFields = (int) fields.parallelStream().filter(f -> !f.isUndermined() && !f.isOpen()).count();
 		
-		assertEquals(result, mines);
+		assertEquals(openFields, mines);
+		assertEquals(closedFields, (rows * columns) - mines);
 	}
 }
